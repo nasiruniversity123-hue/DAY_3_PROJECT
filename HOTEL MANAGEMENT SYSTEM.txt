@@ -1,0 +1,65 @@
+rooms = {
+    101: "Available",
+    102: "Available",
+    103: "Available"
+}
+
+bookings = {}
+
+
+while True:
+    print("\n===== HOTEL BOOKING SYSTEM =====")
+    print("1. View Rooms")
+    print("2. Book Room")
+    print("3. Cancel Booking")
+    print("4. View Bookings")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        print("\nRoom Status:")
+        for room, status in rooms.items():
+            print(f"Room {room}: {status}")
+
+    elif choice == "2":
+        room = int(input("Enter room number: "))
+
+        if room not in rooms:
+            print("Invalid room number!")
+            continue
+
+        if rooms[room] == "Booked":
+            print("Room already booked!")
+            continue
+
+        name = input("Enter your name: ")
+        rooms[room] = "Booked"
+        bookings[room] = name
+        print("Room booked successfully!")
+
+    elif choice == "3":
+        room = int(input("Enter room number to cancel: "))
+
+        if room in bookings:
+            del bookings[room]
+            rooms[room] = "Available"
+            print("Booking cancelled.")
+        else:
+            print("No booking found.")
+
+    elif choice == "4":
+        if not bookings:
+            print("No bookings available.")
+            pass
+        else:
+            print("\nBookings:")
+            for room, name in bookings.items():
+                print(f"Room {room} -> {name}")
+
+    elif choice == "5":
+        print("Thank you! Exiting...")
+        break
+
+    else:
+        print("Invalid choice!")
